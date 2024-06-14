@@ -1,1 +1,3 @@
+npm run formatcheck
+npm run lint
 npm test
