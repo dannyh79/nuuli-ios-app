@@ -1,5 +1,8 @@
-import { ScrollView, Text, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Info from '@/components/workoutOverview/info';
+import Warmup from '@/components/workoutOverview/warmup';
+import Workout from '@/components/workoutOverview/workout';
 
 export default function Index() {
   return (
@@ -12,7 +15,9 @@ export default function Index() {
             alignItems: 'center',
           }}
         >
-          <Text>Edit app/index.tsx to edit this screen.</Text>
+          <Info />
+          <Warmup />
+          <Workout />
         </View>
       </ScrollView>
     </SafeAreaView>
