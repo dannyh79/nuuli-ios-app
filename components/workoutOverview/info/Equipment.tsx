@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
     borderRadius: 38,
     overflow: 'hidden',
     paddingTop: 20,
-    paddingLeft: 25,
     paddingBottom: 25,
     justifyContent: 'space-between',
     position: 'relative',
@@ -95,10 +94,19 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
   header: {
+    // Psuedo left "padding" hack to align equipmentsScrollView's
+    marginLeft: 25,
+
     fontSize: 24,
     fontWeight: 600,
   },
   equipmentsScrollView: {
+    /**
+     * Psuedo left "padding" hack that allows items scrolled to the left
+     * to reach to the container border
+     */
+    marginLeft: 25,
+
     height: 78,
     gap: 12,
     flexDirection: 'row',
