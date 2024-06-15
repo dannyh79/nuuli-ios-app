@@ -11,8 +11,8 @@
     "lint": "expo lint",
     "prepare": "husky",
     "typecheck": "tsc",
-    "formatcheck": "prettier -c \"app/**/*.ts(x)\" \"components/**/*.ts(x)\" \"constants/**/*.ts\" \"hooks/**/*.ts\"",
-    "format": "prettier -w \"app/**/*.ts(x)\" \"components/**/*.ts(x)\" \"constants/**/*.ts\" \"hooks/**/*.ts\""
+    "formatcheck": "prettier -c \"app/**/*.{ts,tsx}\" \"components/**/*.{ts,tsx}\" \"constants/**/*.ts\" \"hooks/**/*.ts\"",
+    "format": "prettier -w \"app/**/*.{ts,tsx}\" \"components/**/*.{ts,tsx}\" \"constants/**/*.ts\" \"hooks/**/*.ts\""
   },
   "jest": {
     "preset": "jest-expo"
