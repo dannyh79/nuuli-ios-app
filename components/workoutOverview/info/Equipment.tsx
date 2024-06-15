@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     marginLeft: 25,
 
     fontSize: 24,
-    fontWeight: 600,
+    fontWeight: '600',
   },
   equipmentsScrollView: {
     /**
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   equipmentLabelWord: {
     width: '100%',
     textTransform: 'uppercase',
-    fontWeight: 400,
+    fontWeight: '400',
     fontSize: 10,
     alignSelf: 'center',
   },

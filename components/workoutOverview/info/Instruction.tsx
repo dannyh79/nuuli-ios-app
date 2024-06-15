@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 600,
+    fontWeight: '600',
   },
   scrollView: {
     width: 240,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     fontSize: 11,
-    fontWeight: 400,
+    fontWeight: '400',
   },
   spacer: {
     width: '100%',

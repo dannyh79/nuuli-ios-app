@@ -42,12 +42,12 @@ const styles = StyleSheet.create({
   },
   header: {
     fontSize: 24,
-    fontWeight: 600,
+    fontWeight: '600',
   },
   description: {
     textTransform: 'uppercase',
     fontSize: 13,
-    fontWeight: 400,
+    fontWeight: '400',
   },
   muscleGroup: {
     marginTop: -10,
