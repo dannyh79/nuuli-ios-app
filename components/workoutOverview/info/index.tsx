@@ -1,6 +1,7 @@
 import { ScrollView, StyleSheet } from 'react-native';
 import Equipment from './Equipment';
 import BodyFocus from './BodyFocus';
+import Instruction from './Instruction';
 
 export const Info = () => (
   <ScrollView
@@ -11,6 +12,7 @@ export const Info = () => (
   >
     <Equipment />
     <BodyFocus />
+    <Instruction />
   </ScrollView>
 );
 
