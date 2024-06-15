@@ -1,22 +1,29 @@
 import { ScrollView, StyleSheet } from 'react-native';
 import Equipment from './Equipment';
+import BodyFocus from './BodyFocus';
 
 export const Info = () => (
   <ScrollView
     horizontal
     showsHorizontalScrollIndicator={false}
     style={styles.container}
+    contentContainerStyle={styles.content}
   >
     <Equipment />
+    <BodyFocus />
   </ScrollView>
 );
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '100%',
+    overflow: 'hidden',
     height: 180,
-    paddingHorizontal: 24,
+  },
+  content: {
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    gap: 10,
   },
 });
 
