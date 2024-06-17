@@ -12,43 +12,55 @@ import {
 import icons from './iconsSvgXml';
 import { toLocale } from './utils';
 
-export type Exercise = {
+interface ExerciseBase {
   title: string;
   imageUrl: ImageURISource;
-  reps: number | number[];
   weight?: number | number[];
+}
+
+export interface DurationBasedExercise extends ExerciseBase {
+  seconds: number;
+  reps?: never;
+}
+
+export interface RepBasedExercise extends ExerciseBase {
+  reps: number | number[];
+  seconds?: never;
+}
+
+export type Exercise = DurationBasedExercise | RepBasedExercise;
+
+export type ExerciseItemProps = Exercise & {
+  sets: number;
 };
 
-export type ExerciseItemProps = Exercise & { sets: number };
-
-export const ExerciseItem = ({
-  title,
-  sets,
-  reps,
-  weight,
-  imageUrl,
-}: ExerciseItemProps) => (
-  <View style={styles.container}>
-    <View style={styles.thumbnailContainer}>
-      <Image source={imageUrl} style={styles.thumbnail} />
-      <InfoButton />
-    </View>
-    <View style={styles.mainSectionContainer}>
-      <View style={styles.textContainer}>
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>
-          {sets} set{sets > 1 && 's'} x{' '}
-          <Text style={styles.descriptionHighlight}>{toRepsLocale(reps)}</Text>
-          {!!weight &&
-            ` x ${Array.isArray(weight) ? weight.join('-') : weight}kg`}
-        </Text>
+export const ExerciseItem = (props: ExerciseItemProps) => {
+  const { title, sets, reps, seconds, weight, imageUrl } = props;
+  return (
+    <View style={styles.container}>
+      <View style={styles.thumbnailContainer}>
+        <Image source={imageUrl} style={styles.thumbnail} />
+        <InfoButton />
       </View>
-      <View>
-        <OptionButton />
+      <View style={styles.mainSectionContainer}>
+        <View style={styles.textContainer}>
+          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.description}>
+            {sets} set{sets > 1 && 's'} x{' '}
+            <Text style={styles.descriptionHighlight}>
+              {!!reps ? toRepsLocale(reps) : toSecondsLocale(seconds!)}
+            </Text>
+            {!!weight &&
+              ` x ${Array.isArray(weight) ? weight.join('-') : weight}kg`}
+          </Text>
+        </View>
+        <View>
+          <OptionButton />
+        </View>
       </View>
     </View>
-  </View>
-);
+  );
+};
 
 const OptionButton = () => (
   <TouchableOpacity style={styles.optionContainer}>
@@ -62,7 +74,10 @@ const InfoButton = () => (
   </Pressable>
 );
 
-const toRepsLocale = (reps: ExerciseItemProps['reps']) =>
+/** This does not append "s" to the acronym "sec". */
+const toSecondsLocale = (seconds: number) => toLocale(seconds, 'sec', false);
+
+const toRepsLocale = (reps: number | number[]) =>
   toLocale(
     Array.isArray(reps) ? reps.join('-') : reps,
     'rep',
