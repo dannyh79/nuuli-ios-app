@@ -16,6 +16,7 @@ export type Exercise = {
   title: string;
   imageUrl: ImageURISource;
   reps: number | number[];
+  weight?: number | number[];
 };
 
 export type ExerciseItemProps = Exercise & { sets: number };
@@ -24,6 +25,7 @@ export const ExerciseItem = ({
   title,
   sets,
   reps,
+  weight,
   imageUrl,
 }: ExerciseItemProps) => (
   <View style={styles.container}>
@@ -36,13 +38,9 @@ export const ExerciseItem = ({
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>
           {sets} set{sets > 1 && 's'} x{' '}
-          <Text style={styles.descriptionHighlight}>
-            {toLocale(
-              Array.isArray(reps) ? reps.join('-') : reps,
-              'rep',
-              Array.isArray(reps) ? true : reps > 1,
-            )}
-          </Text>
+          <Text style={styles.descriptionHighlight}>{toRepsLocale(reps)}</Text>
+          {!!weight &&
+            ` x ${Array.isArray(weight) ? weight.join('-') : weight}kg`}
         </Text>
       </View>
       <View>
@@ -63,6 +61,13 @@ const InfoButton = () => (
     <SvgXml style={styles.thumbnailSvg} xml={icons.info} />
   </Pressable>
 );
+
+const toRepsLocale = (reps: ExerciseItemProps['reps']) =>
+  toLocale(
+    Array.isArray(reps) ? reps.join('-') : reps,
+    'rep',
+    Array.isArray(reps) ? true : reps > 1,
+  );
 
 const styles = StyleSheet.create({
   container: {
