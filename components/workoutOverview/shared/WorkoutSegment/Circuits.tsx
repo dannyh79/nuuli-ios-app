@@ -10,15 +10,17 @@ export type Circuit = {
 };
 
 export type CircuitsProps = {
+  optional?: boolean;
   isEnabled: boolean;
   circuits: Circuit[];
 };
 
-export const Circuits = ({ isEnabled, circuits }: CircuitsProps) => {
+export const Circuits = ({ optional, isEnabled, circuits }: CircuitsProps) => {
   return (
     <View style={{ display: isEnabled ? 'flex' : 'none' }}>
       {circuits.map((circuit, index) => (
         <CircuitItem
+          optional={optional}
           key={['warmup', index].join('-')}
           isFirst={index === 0}
           {...circuit}
@@ -31,27 +33,50 @@ export const Circuits = ({ isEnabled, circuits }: CircuitsProps) => {
 export default Circuits;
 
 type CircuitItemProps = Circuit & {
+  optional?: boolean;
   isFirst: boolean;
   header?: string;
 };
 
-const CircuitItem = ({ isFirst, type, rounds, items }: CircuitItemProps) => {
+const CircuitItem = (props: CircuitItemProps) => {
+  const { optional, isFirst, type, rounds, items } = props;
+
   return (
     <View>
       {!isFirst && (
         <View style={styles.circuitHeadContainer}>
-          <View style={styles.circuitHeadIndicator} />
+          <View
+            style={
+              optional
+                ? styles.optionalCircuitHeadIndicator
+                : styles.circuitHeadIndicator
+            }
+          />
         </View>
       )}
       {items.length > 1 && (
         <View style={styles.circuitHeadContainer}>
-          {!isFirst && <View style={styles.circuitHeadIndicator} />}
+          {!isFirst && (
+            <View
+              style={
+                optional
+                  ? styles.optionalCircuitHeadIndicator
+                  : styles.circuitHeadIndicator
+              }
+            />
+          )}
           <Text style={styles.header}>
             {type} • {toLocale(rounds, 'round', rounds > 1)}
           </Text>
         </View>
       )}
-      <View style={styles.container}>
+      <View
+        style={
+          optional
+            ? styles.optionalMainSectionContainer
+            : styles.mainSectionContainer
+        }
+      >
         {items.map((item, index) => (
           <ExerciseItem
             key={[item.title, index].join('-')}
@@ -64,16 +89,7 @@ const CircuitItem = ({ isFirst, type, rounds, items }: CircuitItemProps) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    padding: 6,
-    borderRadius: 28,
-    borderWidth: 1,
-    borderColor: '#FFFFFF',
-    gap: 12,
-  },
+const baseStyles = StyleSheet.create({
   circuitHeadContainer: {
     minHeight: 32,
     flex: 1,
@@ -82,7 +98,7 @@ const styles = StyleSheet.create({
   },
   circuitHeadIndicator: {
     borderLeftWidth: 1,
-    borderColor: '#FFFFFF',
+    borderColor: '#E9E9E9',
   },
   header: {
     textTransform: 'uppercase',
@@ -91,5 +107,26 @@ const styles = StyleSheet.create({
     color: 'rgba(61, 65, 86, 0.45)',
     padding: 12,
     textAlign: 'center',
+  },
+  mainSectionContainer: {
+    flex: 1,
+    padding: 6,
+    borderRadius: 28,
+    borderWidth: 1,
+    borderColor: '#E9E9E9',
+    gap: 12,
+  },
+});
+
+const styles = StyleSheet.create({
+  ...baseStyles,
+  optionalCircuitHeadIndicator: {
+    ...baseStyles.circuitHeadIndicator,
+    borderColor: '#FFFFFF',
+  },
+  optionalMainSectionContainer: {
+    ...baseStyles.mainSectionContainer,
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    borderColor: '#FFFFFF',
   },
 });

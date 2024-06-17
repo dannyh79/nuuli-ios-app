@@ -36,8 +36,8 @@ export const WorkoutSegment = (props: WorkoutSegmentProps) => {
   return (
     <View
       style={{
-        ...styles.container,
-        paddingBottom: !!isEnabled ? styles.container.paddingBottom : 20,
+        ...(optional ? styles.optionalContainer : styles.container),
+        ...(!isEnabled && { paddingBottom: 20 }),
       }}
     >
       <View style={styles.head}>
@@ -62,17 +62,20 @@ export const WorkoutSegment = (props: WorkoutSegmentProps) => {
           />
         )}
       </View>
-      <Circuits isEnabled={showCircuits} circuits={circuits} />
+      <Circuits
+        optional={optional}
+        isEnabled={showCircuits}
+        circuits={circuits}
+      />
     </View>
   );
 };
 
 export default WorkoutSegment;
 
-const styles = StyleSheet.create({
+const baseStyles = StyleSheet.create({
   container: {
     width: 355,
-    backgroundColor: '#F7EBFA',
     paddingTop: 20,
     paddingHorizontal: 10,
     paddingBottom: 10,
@@ -99,5 +102,13 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     marginTop: 10,
+  },
+});
+
+const styles = StyleSheet.create({
+  ...baseStyles,
+  optionalContainer: {
+    ...baseStyles.container,
+    backgroundColor: '#F7EBFA',
   },
 });
