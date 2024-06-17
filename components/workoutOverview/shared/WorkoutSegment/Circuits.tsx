@@ -3,20 +3,15 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Exercise, ExerciseItem } from './ExerciseItem';
 import { toLocale } from './utils';
 
-export type CircuitsProps = {
-  isEnabled: boolean;
-  circuits: Circuit[];
-};
-
 export type Circuit = {
   type: string;
   rounds: number;
   items: Exercise[];
 };
 
-export type CircuitProps = Circuit & {
-  isFirst: boolean;
-  header?: string;
+export type CircuitsProps = {
+  isEnabled: boolean;
+  circuits: Circuit[];
 };
 
 export const Circuits = ({ isEnabled, circuits }: CircuitsProps) => {
@@ -35,7 +30,12 @@ export const Circuits = ({ isEnabled, circuits }: CircuitsProps) => {
 
 export default Circuits;
 
-const CircuitItem = ({ isFirst, type, rounds, items }: CircuitProps) => {
+type CircuitItemProps = Circuit & {
+  isFirst: boolean;
+  header?: string;
+};
+
+const CircuitItem = ({ isFirst, type, rounds, items }: CircuitItemProps) => {
   return (
     <View>
       {!isFirst && (
