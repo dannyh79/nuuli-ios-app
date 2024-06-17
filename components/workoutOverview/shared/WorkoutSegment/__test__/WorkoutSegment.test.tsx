@@ -1,21 +1,6 @@
-import * as React from 'react';
 import { ImageURISource } from 'react-native';
-import WorkoutSegment from '../shared/WorkoutSegment';
-
-export const Warmup = () => {
-  const [isEnabled, setIsEnabled] = React.useState<boolean>(true);
-  const toggleSwitch = () => setIsEnabled((isEnabled) => !isEnabled);
-
-  return (
-    <WorkoutSegment
-      title="Warm-Up"
-      content={content}
-      optional
-      isEnabled={isEnabled}
-      onToggle={toggleSwitch}
-    />
-  );
-};
+import { render } from '@testing-library/react-native';
+import WorkoutSegment from '../';
 
 const content = {
   minutes: 5,
@@ -49,4 +34,26 @@ const content = {
   ],
 };
 
-export default Warmup;
+describe(`required <WorkoutSegment />`, () => {
+  it(`renders without error`, () => {
+    expect(() =>
+      render(<WorkoutSegment title="Warm-Up" content={content} />),
+    ).not.toThrow();
+  });
+});
+
+describe(`optional <WorkoutSegment />`, () => {
+  it(`renders without error`, () => {
+    expect(() =>
+      render(
+        <WorkoutSegment
+          title="Warm-Up"
+          content={content}
+          optional
+          isEnabled={true}
+          onToggle={() => {}}
+        />,
+      ),
+    ).not.toThrow();
+  });
+});

@@ -208,7 +208,6 @@ const styles = StyleSheet.create({
   optionContainer: {
     width: 40,
   },
-
   optionSvg: {
     width: 28,
     height: 28,
