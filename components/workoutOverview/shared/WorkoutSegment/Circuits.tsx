@@ -24,7 +24,7 @@ export type CircuitsProps = {
 };
 
 export type Circuit = {
-  type?: string;
+  type: string;
   rounds: number;
   items: Exercise[];
 };
@@ -58,7 +58,7 @@ const CircuitItem = ({ isFirst, type, rounds, items }: CircuitProps) => {
           <View style={styles.circuitHeadIndicator} />
         </View>
       )}
-      {!!type && (
+      {items.length > 1 && (
         <View style={styles.circuitHeadContainer}>
           {!isFirst && <View style={styles.circuitHeadIndicator} />}
           <Text style={styles.header}>

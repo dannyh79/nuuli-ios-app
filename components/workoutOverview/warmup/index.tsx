@@ -37,6 +37,7 @@ const content = {
       ],
     },
     {
+      type: 'Circuit',
       rounds: 2,
       items: [
         {
