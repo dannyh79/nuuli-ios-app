@@ -16,6 +16,7 @@ interface ExerciseBase {
   title: string;
   imageUrl: ImageURISource;
   weight?: number | number[];
+  swappable?: boolean;
 }
 
 export interface DurationBasedExercise extends ExerciseBase {
@@ -35,9 +36,12 @@ export type ExerciseItemProps = Exercise & {
 };
 
 export const ExerciseItem = (props: ExerciseItemProps) => {
-  const { title, sets, reps, seconds, weight, imageUrl } = props;
+  const { title, sets, reps, seconds, weight, imageUrl, swappable } = props;
+
+  const [isSwapped, setIsSwapped] = React.useState<boolean>(false);
+  const swapExercise = () => setIsSwapped((isSwapped) => !isSwapped);
   return (
-    <View style={styles.container}>
+    <View style={isSwapped ? styles.swappedContainer : styles.container}>
       <View style={styles.thumbnailContainer}>
         <Image source={imageUrl} style={styles.thumbnail} />
         <InfoButton />
@@ -54,7 +58,10 @@ export const ExerciseItem = (props: ExerciseItemProps) => {
               ` x ${Array.isArray(weight) ? weight.join('-') : weight}kg`}
           </Text>
         </View>
-        <View>
+        <View style={styles.buttonsContainer}>
+          {!!swappable && (
+            <SwapButton isSwapped={isSwapped} onPress={swapExercise} />
+          )}
           <OptionButton />
         </View>
       </View>
@@ -62,8 +69,27 @@ export const ExerciseItem = (props: ExerciseItemProps) => {
   );
 };
 
+type SwapButtonProps = Pick<
+  React.ComponentProps<typeof TouchableOpacity>,
+  'onPress'
+> & {
+  isSwapped: boolean;
+};
+
+const SwapButton = ({ onPress, isSwapped }: SwapButtonProps) => (
+  <Pressable style={styles.swapButton} onPress={onPress}>
+    <View
+      style={isSwapped ? styles.swappedIconContainer : styles.iconContainer}
+    >
+      <SvgXml
+        xml={isSwapped ? icons.crossedArrows : icons.crossedArrowsInverse}
+      />
+    </View>
+  </Pressable>
+);
+
 const OptionButton = () => (
-  <TouchableOpacity style={styles.optionContainer}>
+  <TouchableOpacity style={styles.optionButton}>
     <View style={styles.iconContainer}>
       <SvgXml xml={icons.dots} />
     </View>
@@ -86,8 +112,9 @@ const toRepsLocale = (reps: number | number[]) =>
     Array.isArray(reps) ? true : reps > 1,
   );
 
-const styles = StyleSheet.create({
+const baseStyles = StyleSheet.create({
   container: {
+    borderRadius: 22,
     flexDirection: 'row',
     alignItems: 'center',
     overflow: 'hidden',
@@ -143,16 +170,37 @@ const styles = StyleSheet.create({
   descriptionHighlight: {
     fontWeight: '700',
   },
-  optionContainer: {
+  buttonsContainer: {
+    flexDirection: 'row',
+  },
+  swapButton: {
     width: 40,
-    flexDirection: 'row-reverse',
+    alignItems: 'center',
+  },
+  optionButton: {
+    width: 40,
+    alignItems: 'center',
   },
   iconContainer: {
     width: 26,
     height: 26,
+    borderColor: '#262C45',
+    borderWidth: 1,
     borderRadius: 20,
     backgroundColor: '#262C45',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+});
+
+const styles = StyleSheet.create({
+  ...baseStyles,
+  swappedContainer: {
+    ...baseStyles.container,
+    backgroundColor: '#F0ECFF',
+  },
+  swappedIconContainer: {
+    ...baseStyles.iconContainer,
+    backgroundColor: '#FFFFFF',
   },
 });
