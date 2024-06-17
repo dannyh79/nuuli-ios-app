@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 import icons from './iconsSvgXml';
+import { toLocale } from './utils';
 
 export type Exercise = {
   title: string;
@@ -61,7 +62,7 @@ const CircuitItem = ({ isFirst, type, rounds, items }: CircuitProps) => {
         <View style={styles.circuitHeadContainer}>
           {!isFirst && <View style={styles.circuitHeadIndicator} />}
           <Text style={styles.header}>
-            {type} • {rounds} rounds
+            {type} • {toLocale(rounds, 'round', rounds > 1)}
           </Text>
         </View>
       )}
@@ -90,9 +91,13 @@ const ExerciseItem = ({ title, sets, reps, imageUrl }: ExerciseItemProps) => (
       <View style={styles.textContainer}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description}>
-          {sets} sets x{' '}
+          {sets} set{sets > 1 && 's'} x{' '}
           <Text style={styles.descriptionHighlight}>
-            {Array.isArray(reps) ? reps.join('-') : reps} reps
+            {toLocale(
+              Array.isArray(reps) ? reps.join('-') : reps,
+              'rep',
+              Array.isArray(reps) ? true : reps > 1,
+            )}
           </Text>
         </Text>
       </View>

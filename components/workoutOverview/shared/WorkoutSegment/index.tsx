@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import Circuits, { Circuit } from './Circuits';
+import { toLocale } from './utils';
 
 type WorkoutContent = {
   minutes: number;
@@ -44,8 +45,13 @@ export const WorkoutSegment = (props: WorkoutSegmentProps) => {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subTitle}>
             {minutes} min •{' '}
-            {circuits.reduce((count, { items }) => (count += items.length), 0)}{' '}
-            exercises
+            {(() => {
+              const exercises = circuits.reduce(
+                (count, { items }) => (count += items.length),
+                0,
+              );
+              return toLocale(exercises, 'exercise', exercises > 1);
+            })()}
           </Text>
         </View>
         {optional && (
