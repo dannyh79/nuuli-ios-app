@@ -40,7 +40,7 @@ export const WorkoutSegment = (props: WorkoutSegmentProps) => {
         ...(!isEnabled && { paddingBottom: 20 }),
       }}
     >
-      <View style={styles.head}>
+      <View style={optional ? styles.optionalHead : styles.head}>
         <View style={styles.headText}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.subTitle}>
@@ -76,14 +76,11 @@ export default WorkoutSegment;
 const baseStyles = StyleSheet.create({
   container: {
     width: 355,
-    paddingTop: 20,
-    paddingHorizontal: 10,
-    paddingBottom: 10,
     borderRadius: 38,
     gap: 30,
   },
   head: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 25,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -107,8 +104,15 @@ const baseStyles = StyleSheet.create({
 
 const styles = StyleSheet.create({
   ...baseStyles,
+  optionalHead: {
+    ...baseStyles.head,
+    paddingHorizontal: 15,
+  },
   optionalContainer: {
     ...baseStyles.container,
+    paddingTop: 20,
+    paddingHorizontal: 10,
+    paddingBottom: 10,
     backgroundColor: '#F7EBFA',
   },
 });
