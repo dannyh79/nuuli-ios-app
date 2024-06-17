@@ -64,7 +64,9 @@ export const ExerciseItem = (props: ExerciseItemProps) => {
 
 const OptionButton = () => (
   <TouchableOpacity style={styles.optionContainer}>
-    <SvgXml style={styles.optionSvg} xml={icons.dots} />
+    <View style={styles.iconContainer}>
+      <SvgXml xml={icons.dots} />
+    </View>
   </TouchableOpacity>
 );
 
@@ -143,9 +145,14 @@ const styles = StyleSheet.create({
   },
   optionContainer: {
     width: 40,
+    flexDirection: 'row-reverse',
   },
-  optionSvg: {
-    width: 28,
-    height: 28,
+  iconContainer: {
+    width: 26,
+    height: 26,
+    borderRadius: 20,
+    backgroundColor: '#262C45',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
