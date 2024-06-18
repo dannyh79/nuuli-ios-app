@@ -50,7 +50,7 @@ export const ExerciseItem = (props: ExerciseItemProps) => {
         <View style={styles.textContainer}>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.description}>
-            {sets} set{sets > 1 && 's'} x{' '}
+            {toLocale(sets, 'set', sets > 1)} x{' '}
             <Text style={styles.descriptionHighlight}>
               {!!reps ? toRepsLocale(reps) : toSecondsLocale(seconds!)}
             </Text>
