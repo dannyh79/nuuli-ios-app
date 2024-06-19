@@ -14,13 +14,24 @@ import {
 } from '@/components/workoutOverview/queries';
 import WorkoutContext from '@/components/workoutOverview/workoutContext';
 
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect } from 'react';
+
+// Prevent the splash screen from auto-hiding before loading completes.
+SplashScreen.preventAutoHideAsync().catch(console.error);
+
 export default function Index() {
   const { loading, data } = useQuery<GetWorkoutResponse>(GET_WORKOUT, {
     variables: { id: stubWorkoutContentId },
   });
+
+  useEffect(() => {
+    if (!loading) {
+      SplashScreen.hideAsync().catch(console.error);
+    }
+  }, [loading]);
   if (loading) {
-    // should use loading animation here
-    return;
+    return null;
   }
 
   const formattedData = toFormattedWorkout(data!);
