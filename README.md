@@ -4,6 +4,41 @@
 
 For full instructions on what we'd like you to do please visit our [official developer test page](https://www.notion.so/nuliapp/Nuli-Mid-Level-Mobile-Developer-Test-83f53a4746824e4a8f924b8b9fc13d69#ac50bed4e72645a2a5b066ff67bb7a93).
 
+## Deliverables
+
+- UI
+    - [x] Exercise list
+    - [x] iOS support
+    - [ ] Animations
+- Integration
+    - [x] Workout content integration
+    - [ ] Exercise list integration
+    - [ ] Exercise swapping integration
+- Misc
+    - Figma mockup
+        - [ ] Match fonts
+        - [ ] Component backdrop shadows
+
+## Backlog
+
+- UI
+    - [ ] Animations
+    - [ ] Unified palatte/theme for styles
+    - [ ] Parameterized styles/effects
+    - [ ] Storybook
+    - [ ] Error boundaries
+- Integration
+    - [ ] Exercise list integration
+    - [ ] Exercise swapping integration
+- Misc
+    - Figma mockup
+        - [ ] Match fonts
+        - [ ] Component backdrop shadows
+        - [ ] Responsive design: Unify UX for devices other than `375px × 812px` viewport
+    - [ ] Proper SVG files location
+    - [ ] Component behavior tests
+    - [ ] Use .env to inject variables pertaining environment, e.g., backend URL, etc
+
 ## Get started
 
 1. Install dependencies
