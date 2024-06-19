@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Image,
   ImageURISource,
@@ -7,32 +8,37 @@ import {
   View,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import WorkoutContext from '../workoutContext';
 
-export const Instruction = () => (
-  <View style={styles.container}>
-    <View style={styles.main}>
-      <Text style={styles.header}>Instructions</Text>
-      <View
-        style={{
-          flex: 1,
-          borderRadius: 18,
-          overflow: 'hidden',
-        }}
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={styles.scrollView}
-          contentContainerStyle={styles.scrollViewContentContainer}
+export const Instruction = () => {
+  const { instruction } = React.useContext(WorkoutContext);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.main}>
+        <Text style={styles.header}>Instructions</Text>
+        <View
+          style={{
+            flex: 1,
+            borderRadius: 18,
+            overflow: 'hidden',
+          }}
         >
-          <Text style={styles.instructions}>{text}</Text>
-          <View style={styles.spacer} />
-        </ScrollView>
-        <Fade />
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollViewContentContainer}
+          >
+            <Text style={styles.instructions}>{instruction}</Text>
+            <View style={styles.spacer} />
+          </ScrollView>
+          <Fade />
+        </View>
       </View>
+      <InfluencerAside />
     </View>
-    <InfluencerAside />
-  </View>
-);
+  );
+};
 
 export default Instruction;
 
@@ -106,7 +112,3 @@ const styles = StyleSheet.create({
     right: -56,
   },
 });
-
-const text = `This training program will begin from a full body circuit training on the first day:
-You will be able to learn how to use different muscle groups from today’s training.
-You will be able to learn how to use different muscle groups.`;
