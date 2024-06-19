@@ -6,7 +6,7 @@ export const Workout = () => (
   <WorkoutSegment title="Workout" content={content} />
 );
 
-const stubImage = require('@/assets/images/influencer.png') as ImageURISource;
+const stubImage = require('@/assets/images/exercise.png') as ImageURISource;
 const content = {
   minutes: 60,
   circuits: [
