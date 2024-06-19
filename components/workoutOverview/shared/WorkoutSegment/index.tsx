@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
-import Circuits, { Circuit } from './Circuits';
+import { WorkoutSegContent } from '../../types';
+import Circuits from './Circuits';
 import { toLocale } from './utils';
-
-type WorkoutContent = {
-  minutes: number;
-  circuits: Circuit[];
-};
 
 interface SegmentProps {
   title: string;
-  content: WorkoutContent;
+  content: WorkoutSegContent;
   optional?: boolean;
 }
 

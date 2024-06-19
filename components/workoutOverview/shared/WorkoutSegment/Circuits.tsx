@@ -1,13 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Exercise, ExerciseItem } from './ExerciseItem';
+import { Circuit } from '../../types';
+import { ExerciseItem } from './ExerciseItem';
 import { toLocale } from './utils';
-
-export type Circuit = {
-  type: string;
-  rounds: number;
-  items: Exercise[];
-};
 
 export type CircuitsProps = {
   optional?: boolean;

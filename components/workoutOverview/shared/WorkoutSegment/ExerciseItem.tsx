@@ -2,7 +2,6 @@ import * as React from 'react';
 import { SvgXml } from 'react-native-svg';
 import {
   Image,
-  ImageURISource,
   Pressable,
   StyleSheet,
   Text,
@@ -10,26 +9,8 @@ import {
   View,
 } from 'react-native';
 import icons from './iconsSvgXml';
+import { Exercise } from '../../types';
 import { toLocale } from './utils';
-
-interface ExerciseBase {
-  title: string;
-  imageUrl: ImageURISource;
-  weight?: number | number[];
-  swappable?: boolean;
-}
-
-export interface DurationBasedExercise extends ExerciseBase {
-  seconds: number;
-  reps?: never;
-}
-
-export interface RepBasedExercise extends ExerciseBase {
-  reps: number | number[];
-  seconds?: never;
-}
-
-export type Exercise = DurationBasedExercise | RepBasedExercise;
 
 export type ExerciseItemProps = Exercise & {
   sets: number;

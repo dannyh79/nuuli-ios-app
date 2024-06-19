@@ -1,5 +1,6 @@
 import { ImageURISource } from 'react-native';
 import { render } from '@testing-library/react-native';
+import { WorkoutSegContent } from '../../../types';
 import WorkoutSegment from '../';
 
 const content = {
@@ -32,7 +33,7 @@ const content = {
       ],
     },
   ],
-};
+} as WorkoutSegContent;
 
 describe(`required <WorkoutSegment />`, () => {
   it(`renders without error`, () => {
