@@ -50,6 +50,8 @@ jobs:
           key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json', 'package.json', '.github/workflows/main.yml') }}
       - name: Install
         run: npm ci
+      - name: Check format
+        run: npm run formatcheck
       - name: Lint
         run: npm run lint
 
