@@ -1,3 +1,5 @@
+[![CI](https://github.com/dannyh79/nuuli-ios-app/actions/workflows/main.yml/badge.svg)](https://github.com/dannyh79/nuuli-ios-app/actions/workflows/main.yml)
+
 # Welcome to the mobile nüli test app
 
 For full instructions on what we'd like you to do please visit our [official developer test page](https://www.notion.so/nuliapp/Nuli-Mid-Level-Mobile-Developer-Test-83f53a4746824e4a8f924b8b9fc13d69#ac50bed4e72645a2a5b066ff67bb7a93).
