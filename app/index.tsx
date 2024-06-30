@@ -16,6 +16,7 @@ import WorkoutContext from '@/components/workoutOverview/workoutContext';
 
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
+import WorkoutNotFound from '@/components/workoutOverview/WorkoutNotFound';
 
 // Prevent the splash screen from auto-hiding before loading completes.
 SplashScreen.preventAutoHideAsync().catch(console.error);
@@ -34,8 +35,15 @@ export default function Index() {
     return null;
   }
 
-  const formattedData = toFormattedWorkout(data!);
+  if (!data) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <WorkoutNotFound />
+      </SafeAreaView>
+    );
+  }
 
+  const formattedData = toFormattedWorkout(data);
   return (
     <WorkoutContext.Provider value={formattedData}>
       <SafeAreaView style={styles.container}>
